@@ -1,0 +1,16 @@
+onerror {puts "sim: error trap. exiting"; quit}
+onbreak {puts "sim: break trap. exiting"; quit}
+
+vlib work
+
+vmap work work
+
+vcom ../hdl/src/*.vhd
+vcom ../hdl/tb/*.vhd
+
+vsim -voptargs="+acc=rpn" work.testbench -t 1ps
+
+touch wave.do
+do wave.do
+run -all
+quit
